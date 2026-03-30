@@ -43,6 +43,24 @@ const videos = [
     description: "A hard-hitting story exposing truth, raising marginalized voices, and demanding accountability.",
     views: "Viral",
     category: "Social Justice",
+  },
+  {
+    id: "ameer-interview",
+    videoId: "SCKLoWtA6pU",
+    youtubeUrl: "https://www.youtube.com/watch?v=SCKLoWtA6pU",
+    title: "Direct Ameer Interview",
+    description: "In-depth and fiery interview with Director Ameer, breaking down contemporary issues.",
+    views: "Viral",
+    category: "Political",
+  },
+  {
+    id: "nallakannu-interview",
+    videoId: "jrSxKmFgSyo",
+    youtubeUrl: "https://youtu.be/jrSxKmFgSyo",
+    title: "Nallakannu Ayya Interview",
+    description: "Priceless insights and historical perspective from veteran communist leader Nallakannu Ayya.",
+    views: "Viral",
+    category: "Political",
   }
 ];
 

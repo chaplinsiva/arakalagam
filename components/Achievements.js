@@ -10,7 +10,7 @@ const achievements = [
     title: "Investigative Impact",
     description:
       "Exposed critical cases like Srimathi Case with 1M+ views, driving public discourse and accountability.",
-    stat: "1M+",
+    stat: "10+",
     statLabel: "Views on Impact Videos",
   },
   {
