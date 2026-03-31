@@ -7,24 +7,24 @@ import Image from "next/image";
 import VideoModal from "./VideoModal";
 
 const videos = [
+
   {
-    id: "twitter-dmkitwing",
-    type: "twitter",
-    videoId: "1996952630422044982",
-    youtubeUrl: "https://x.com/DMKITwing/status/1996952630422044982?s=20",
-    title: "Viral Expose shared by DMK IT Wing",
-    description: "Crucial highlight catching the attention of major political wings on X (Twitter).",
+    id: "nakheeran-gopal-interview",
+    videoId: "59YgkcoX6Ak",
+    youtubeUrl: "https://youtu.be/59YgkcoX6Ak?si=GDkwCOrw79ZGnkZ1",
+    title: "Nakheeran Gopal Interview",
+    description: "Exclusive in-depth interview with Nakheeran Gopal, uncovering critical insights and hard-hitting perspectives on Tamil Nadu's political landscape.",
     views: "Viral",
-    category: "Political",
+    category: "Investigative",
   },
   {
-    id: "srimathi-vanjinathan",
-    videoId: "QlkXjLBt_Ic",
-    youtubeUrl: "https://www.youtube.com/watch?v=QlkXjLBt_Ic",
-    title: "Advocate Vanjinathan Exposes the investigation of Srimathi case",
-    description: "Viral exclusive interview breaking down the entire Srimathi case investigation that shook Tamil Nadu",
-    views: "1M+",
-    category: "Investigative",
+    id: "mano-thangaraj-madurai",
+    videoId: "STs3tpRwcoI",
+    youtubeUrl: "https://youtu.be/STs3tpRwcoI",
+    title: "திடீர் என மதுரை ஆய்வில் Minister Mano Thangaraj !! Fileலோடு அதிகாரிகள் சந்தோசத்தில் மக்கள் !!",
+    description: "Minister Mano Thangaraj's surprise inspection in Madurai — a rare on-ground accountability moment cheered by the public.",
+    views: "Viral",
+    category: "Political",
   },
   {
     id: "highlight-2",
@@ -151,6 +151,16 @@ const videos = [
     description: "Spot report covering the clashes and tension during unexpected ground events in Erode.",
     views: "Viral",
     category: "Investigative",
+  },
+  {
+    id: "twitter-dmkitwing",
+    type: "twitter",
+    videoId: "1996952630422044982",
+    youtubeUrl: "https://x.com/DMKITwing/status/1996952630422044982?s=20",
+    title: "Viral Expose shared by DMK IT Wing",
+    description: "Crucial highlight catching the attention of major political wings on X (Twitter).",
+    views: "Viral",
+    category: "Political",
   }
 ];
 

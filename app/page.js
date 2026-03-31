@@ -18,10 +18,10 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <FeaturedInterviews />
         <Achievements />
         <HighlightVideos />
         <Documentaries />
-        <FeaturedInterviews />
         <NetworkChannels />
         <Analytics />
         <Collaboration />
