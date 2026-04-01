@@ -171,11 +171,14 @@ export default function HighlightVideos() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCategory, setActiveCategory] = useState("All");
   const [modalVideo, setModalVideo] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const filtered =
     activeCategory === "All"
       ? videos
       : videos.filter((v) => v.category === activeCategory);
+
+  const displayedVideos = showAll ? filtered : filtered.slice(0, 6);
 
   return (
     <section id="videos" className="relative py-24 lg:py-32">
@@ -226,7 +229,7 @@ export default function HighlightVideos() {
 
         {/* Video Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((video, i) => {
+          {displayedVideos.map((video, i) => {
             const isTwitter = video.type === "twitter";
             return (
             <motion.div
@@ -289,6 +292,23 @@ export default function HighlightVideos() {
             </motion.div>
           )})}
         </div>
+
+        {/* Expand / Collapse Button */}
+        {filtered.length > 6 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.5 }}
+            className="flex justify-center mt-12 mb-4"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white font-[var(--font-outfit)] font-semibold text-lg hover:shadow-[0_0_20px_rgba(75,0,130,0.6)] hover:scale-105 transition-all duration-300"
+            >
+              {showAll ? "Show Less" : "View More Highlights"}
+            </button>
+          </motion.div>
+        )}
 
         {/* View All */}
         <motion.div

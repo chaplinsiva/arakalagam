@@ -27,9 +27,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm tracking-[0.3em] uppercase text-[#D4AF37] font-medium">
-            Who We Are
-          </span>
+
           <h2 className="font-[var(--font-outfit)] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6">
             About{" "}
             <span className="gold-gradient">Arakalagam TV</span>
@@ -37,106 +35,35 @@ export default function About() {
           <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Content */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start max-w-6xl mx-auto mt-20">
+          {/* Left - Headline */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:w-1/3 shrink-0"
           >
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(75,0,130,0.3)]">
-                  <Target className="w-6 h-6 text-[#D4AF37]" />
-                </div>
-                <div>
-                  <h3 className="font-[var(--font-outfit)] text-xl font-bold text-white mb-2">
-                    Our Mission
-                  </h3>
-                  <p className="text-[#A0A0B0] leading-relaxed">
-                    Arakalagam TV is a high-impact independent Tamil digital news
-                    media platform dedicated to shaping political and social
-                    discourse. We amplify marginalized voices, uncover truth
-                    through investigative journalism, and drive awareness on
-                    critical social issues.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(75,0,130,0.3)]">
-                  <Mic className="w-6 h-6 text-[#D4AF37]" />
-                </div>
-                <div>
-                  <h3 className="font-[var(--font-outfit)] text-xl font-bold text-white mb-2">
-                    Founded By Thavam
-                  </h3>
-                  <p className="text-[#A0A0B0] leading-relaxed">
-                    Founded by <span className="text-[#D4AF37] font-medium">Thavam</span>,
-                    Arakalagam TV has grown from a passion project into a
-                    powerful media network that influences millions across Tamil
-                    Nadu and the global Tamil diaspora. (Thavam and Thamizh Dasan collaborated exclusively on the Thiruparankundram documentary).
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(75,0,130,0.3)]">
-                  <MessageSquare className="w-6 h-6 text-[#D4AF37]" />
-                </div>
-                <div>
-                  <h3 className="font-[var(--font-outfit)] text-xl font-bold text-white mb-2">
-                    Our Focus
-                  </h3>
-                  <p className="text-[#A0A0B0] leading-relaxed">
-                    Social justice, political analysis, custodial violence
-                    awareness, historical storytelling, and fearless
-                    investigative reporting — we cover the stories mainstream
-                    media ignores.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <h3 className="font-[var(--font-outfit)] text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              Who <br className="hidden lg:block" />
+              <span className="gold-gradient">We Are</span>
+            </h3>
+            <div className="w-16 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mt-6 rounded-full" />
           </motion.div>
 
-          {/* Right - Stats Cards */}
+          {/* Right - Content */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid gap-6"
+            className="lg:w-2/3"
           >
-            {stats.map((stat, i) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 + i * 0.15 }}
-                  className="glass-card p-6 flex items-center gap-6"
-                >
-                  <div
-                    className="w-16 h-16 rounded-xl flex items-center justify-center shrink-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${stat.color}20, ${stat.color}10)`,
-                      boxShadow: `0 0 30px ${stat.color}15`,
-                    }}
-                  >
-                    <Icon className="w-8 h-8" style={{ color: stat.color }} />
-                  </div>
-                  <div>
-                    <p
-                      className="font-[var(--font-outfit)] text-3xl sm:text-4xl font-bold"
-                      style={{ color: stat.color }}
-                    >
-                      {stat.number}
-                    </p>
-                    <p className="text-[#A0A0B0] text-sm mt-1">{stat.label}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
+            <p className="text-[#E0E0E0] text-lg sm:text-xl leading-relaxed font-light">
+              We specialize in creating <span className="text-white font-medium">high-impact political content</span> designed to transform your public image into a powerful, recognizable brand. Our team has a proven track record of producing viral videos that don&apos;t just share information—they center your face and your identity as the definitive voice of the people. In today&apos;s digital-first landscape, voters connect with personalities before they connect with policies, and we excel at building that essential human connection through the screen.
+              <br /><br />
+              What sets us apart is our deep commitment to a <span className="text-white font-medium">progressive mindset and social justice</span>. We don&apos;t just record events; we translate your sociological vision into a compelling digital narrative that aligns perfectly with the core values of your party. By rooting our content in these ideals, we position you as a forward-thinking leader who truly understands the pulse of the community.
+              <br /><br />
+              Using <span className="text-[#D4AF37] font-medium">cinematic storytelling and strategic editing</span>, we ensure your presence is commanding, your values are unmistakable, and your face becomes synonymous with leadership and trust. We would love to bring this vision to your campaign, maximizing your personal reach and ensuring that when voters head to the polls, yours is the identity they remember and trust.
+            </p>
           </motion.div>
         </div>
       </div>

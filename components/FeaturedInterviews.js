@@ -116,6 +116,78 @@ export default function FeaturedInterviews() {
           <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-6" />
         </motion.div>
 
+        {/* Photo Collage */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-20"
+        >
+          {/* Collage heading */}
+          <div className="text-center mb-10">
+            <span className="text-xs tracking-[0.3em] uppercase text-[#D4AF37] font-medium">
+              On the Ground
+            </span>
+            <h3 className="font-[var(--font-outfit)] text-2xl sm:text-3xl font-bold text-white mt-3">
+              Behind the{" "}
+              <span className="gold-gradient">Scenes</span>
+            </h3>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-4" />
+          </div>
+
+          {/* Collage grid */}
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+            {[
+              "IMG_20260304_113415.jpg.jpeg",
+              "IMG_20260304_122431.jpg.jpeg",
+              "IMG_20260304_123512.jpg (2).jpeg",
+              "IMG_20260304_124207.jpg.jpeg",
+              "IMG_20260304_133618_1.jpg.jpeg",
+              "IMG_20260304_135030.jpg.jpeg",
+              "IMG_20260304_140406.jpg.jpeg",
+              "IMG_20260304_140443.jpg.jpeg",
+              "IMG_20260401_140634.jpg.jpeg",
+              "Screenshot 2026-04-01 134121.png",
+              "Screenshot 2026-04-01 134216.png",
+              "Screenshot 2026-04-01 134959.png",
+              "Snapshot_300.PNG",
+              "T a.jpg",
+              "அரசு வன்முறையை பேசும் ஜெய் பீம் முக்கியமான படம் _ SuryavsPmk_Jaibhimissue _ Thirumavalavan Intervew 0-15 screenshot.png",
+              "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 2-42 screenshot.png",
+              "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 6-55 screenshot.png",
+            ].map((filename, idx) => (
+              <motion.div
+                key={filename}
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.05 * idx }}
+                className="relative overflow-hidden rounded-xl group break-inside-avoid shadow-lg mb-4 inline-block w-full"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(212,175,55,0.08)",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/pics/${filename}`}
+                  alt={`Arakalagam interview moment ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0F]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
+                {/* Gold shimmer on hover */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(90deg, #4B0082, #D4AF37)",
+                  }}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}

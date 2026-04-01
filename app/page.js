@@ -19,9 +19,9 @@ export default function Home() {
         <Hero />
         <About />
         <FeaturedInterviews />
+        <Documentaries />
         <Achievements />
         <HighlightVideos />
-        <Documentaries />
         <NetworkChannels />
         <Analytics />
         <Collaboration />

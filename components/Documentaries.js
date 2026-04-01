@@ -63,53 +63,53 @@ export default function Documentaries() {
           {documentaries.map((doc, i) => (
             <motion.div
               key={doc.id}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="w-full max-w-3xl"
+              className="w-full max-w-6xl"
             >
-              <div className="glass-card overflow-hidden group h-full">
+              <div className="glass-card overflow-hidden group h-full rounded-3xl border-0 shadow-2xl">
                 {/* Thumbnail */}
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="relative aspect-[4/3] sm:aspect-[21/9] overflow-hidden bg-black">
                   <Image
                     src={`https://img.youtube.com/vi/${doc.videoId}/maxresdefault.jpg`}
                     alt={doc.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out opacity-80"
                   />
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t ${doc.gradient} opacity-60`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0F] via-transparent to-transparent" />
+                  {/* Clean shadow overlay instead of pink tint */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/40 to-transparent" />
 
-                  {/* Play button */}
+                  {/* Play button Centered */}
                   <button
                     onClick={() => setModalVideo(doc.videoId)}
-                    className="absolute bottom-4 right-4 w-14 h-14 rounded-full bg-[#D4AF37] flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 shadow-[0_0_25px_rgba(212,175,55,0.4)]"
+                    className="absolute inset-0 m-auto w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[rgba(212,175,55,0.9)] flex items-center justify-center opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 shadow-[0_0_40px_rgba(212,175,55,0.4)] backdrop-blur-md"
                   >
-                    <Play className="w-6 h-6 text-[#0B0B0F] fill-current ml-0.5" />
+                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-black fill-current ml-2" />
                   </button>
 
                   {/* Episode badge */}
-                  <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-[rgba(212,175,55,0.2)]">
-                    <Film className="w-3.5 h-3.5 text-[#D4AF37]" />
-                    <span className="text-xs font-medium text-white">
+                  <div className="absolute top-6 sm:top-8 left-6 sm:left-8 flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-[rgba(212,175,55,0.3)]">
+                    <Film className="w-4 h-4 text-[#D4AF37]" />
+                    <span className="text-sm font-semibold text-white tracking-widest uppercase">
                       {doc.episodes}
                     </span>
                   </div>
-                </div>
 
-                {/* Info */}
-                <div className="p-6">
-                  <p className="text-xs text-[#D4AF37] font-medium uppercase tracking-wider mb-2">
-                    {doc.subtitle}
-                  </p>
-                  <h3 className="font-[var(--font-outfit)] text-xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
-                    {doc.title}
-                  </h3>
-                  <p className="text-[#A0A0B0] text-sm leading-relaxed line-clamp-3">
-                    {doc.description}
-                  </p>
+                  {/* Minimalist Info overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12">
+                    <div className="max-w-4xl">
+                      <p className="text-sm sm:text-base text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mb-4">
+                        {doc.subtitle}
+                      </p>
+                      <h3 className="font-[var(--font-outfit)] text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 drop-shadow-xl tracking-tight">
+                        {doc.title}
+                      </h3>
+                      <p className="text-[#E0E0E0] text-lg sm:text-xl leading-relaxed font-light drop-shadow-md">
+                        {doc.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

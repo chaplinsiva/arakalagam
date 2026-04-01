@@ -107,15 +107,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          <a
-            href="https://www.youtube.com/@ARAKALAGAM"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => handleScroll("#videos")}
             className="group px-8 py-4 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white font-semibold text-lg flex items-center gap-3 hover:shadow-[0_0_40px_rgba(75,0,130,0.5)] transition-all duration-500 hover:scale-105"
           >
             <Play className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
             Watch Highlights
-          </a>
+          </button>
           <button
             onClick={() => handleScroll("#collaboration")}
             className="px-8 py-4 rounded-full border border-[rgba(212,175,55,0.3)] text-[#D4AF37] font-semibold text-lg flex items-center gap-3 hover:bg-[rgba(212,175,55,0.08)] hover:border-[rgba(212,175,55,0.5)] transition-all duration-500 hover:scale-105"
