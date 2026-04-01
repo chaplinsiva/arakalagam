@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Play, Tv } from "lucide-react";
+import { Menu, X, Play, Phone, Mail } from "lucide-react";
+import { ARAKALAGAM_LOGO_URL } from "@/lib/channels";
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "@/lib/contact";
 
 const navLinks = [
   { name: "Home", href: "#hero" },
@@ -39,7 +41,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0B0B0F]/80 backdrop-blur-xl border-b border-[rgba(212,175,55,0.1)] shadow-[0_4px_30px_rgba(75,0,130,0.15)]"
+          ? "bg-[#0B0B0F]/85 backdrop-blur-xl border-b border-[rgba(212,175,55,0.12)] shadow-[0_8px_40px_rgba(0,0,0,0.35),0_0_1px_rgba(212,175,55,0.08)_inset]"
           : "bg-transparent"
       }`}
     >
@@ -52,14 +54,14 @@ export default function Navbar() {
             className="flex items-center gap-3 group"
           >
             <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(75,0,130,0.4)] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-shadow duration-300 overflow-hidden">
-              <img src="https://yt3.googleusercontent.com/m3rHVIVMOHyoujV49Kjb2x9o4o5Hp7TpHNBh7GbRGx9L3UHSbdqfLLwfDsFcBdUOIRZXk-sb=s160-c-k-c0x00ffffff-no-rj" alt="Arakalagam TV Logo" className="w-full h-full object-cover" />
+              <img src={ARAKALAGAM_LOGO_URL} alt="ARAKALAGAM MEDIA logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="font-[var(--font-outfit)] text-lg font-bold tracking-wider text-white">
                 ARAKALAGAM
               </h1>
               <p className="text-[10px] tracking-[0.3em] text-[#D4AF37] uppercase -mt-1">
-                TV
+                MEDIA
               </p>
             </div>
           </a>
@@ -77,11 +79,27 @@ export default function Navbar() {
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4B0082] to-[#D4AF37] group-hover:w-3/4 transition-all duration-300" />
               </a>
             ))}
+            <div className="ml-2 flex items-center gap-1">
+              <a
+                href={CONTACT_PHONE_TEL}
+                className="p-2.5 rounded-full text-[#A0A0B0] hover:text-[#D4AF37] hover:bg-[rgba(212,175,55,0.08)] transition-colors"
+                aria-label={`Call ${CONTACT_PHONE_DISPLAY}`}
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="p-2.5 rounded-full text-[#A0A0B0] hover:text-[#D4AF37] hover:bg-[rgba(212,175,55,0.08)] transition-colors"
+                aria-label={`Email ${CONTACT_EMAIL}`}
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
             <a
               href="https://www.youtube.com/@ARAKALAGAM"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-4 px-5 py-2 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white text-sm font-semibold flex items-center gap-2 hover:shadow-[0_0_25px_rgba(75,0,130,0.5)] transition-all duration-300 hover:scale-105"
+              className="ml-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white text-sm font-semibold flex items-center gap-2 hover:shadow-[0_0_25px_rgba(75,0,130,0.5)] transition-all duration-300 hover:scale-105"
             >
               <Play className="w-4 h-4 fill-current" />
               Watch Now
@@ -132,6 +150,22 @@ export default function Navbar() {
                 <Play className="w-4 h-4 fill-current inline mr-2" />
                 Watch Now
               </a>
+              <div className="pt-4 mt-4 border-t border-[rgba(212,175,55,0.12)] space-y-2 px-4 pb-2">
+                <a
+                  href={CONTACT_PHONE_TEL}
+                  className="flex items-center gap-3 px-2 py-2 rounded-lg text-[#D4AF37] font-medium"
+                >
+                  <Phone className="w-5 h-5 shrink-0" aria-hidden />
+                  {CONTACT_PHONE_DISPLAY}
+                </a>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="flex items-start gap-3 px-2 py-2 rounded-lg text-[#A0A0B0] text-sm break-all"
+                >
+                  <Mail className="w-5 h-5 shrink-0 text-[#D4AF37] mt-0.5" aria-hidden />
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

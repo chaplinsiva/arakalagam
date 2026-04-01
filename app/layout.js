@@ -1,5 +1,6 @@
 import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
+import { ARAKALAGAM_LOGO_URL } from "@/lib/channels";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -13,12 +14,18 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata = {
-  title: "Arakalagam TV | Independent Tamil Media Powering Social Change",
+  title: "ARAKALAGAM MEDIA | Independent Tamil Media Powering Social Change",
   description:
-    "Arakalagam TV is a high-impact independent Tamil digital news media network focused on social justice, political analysis, investigative journalism, and historical awareness. 300K+ subscribers, 5000+ videos.",
+    "ARAKALAGAM MEDIA is a high-impact independent Tamil digital news media network focused on social justice, political analysis, investigative journalism, and historical awareness. 300K+ subscribers, 5000+ videos.",
   keywords: [
-    "Arakalagam TV",
+    "ARAKALAGAM MEDIA",
     "Tamil media",
     "independent journalism",
     "social justice",
@@ -27,13 +34,13 @@ export const metadata = {
     "investigative journalism",
   ],
   openGraph: {
-    title: "Arakalagam TV | Independent Tamil Media Powering Social Change",
+    title: "ARAKALAGAM MEDIA | Independent Tamil Media Powering Social Change",
     description:
       "A high-impact independent Tamil media network shaping political and social discourse.",
     type: "website",
   },
   icons: {
-    icon: "https://yt3.googleusercontent.com/m3rHVIVMOHyoujV49Kjb2x9o4o5Hp7TpHNBh7GbRGx9L3UHSbdqfLLwfDsFcBdUOIRZXk-sb=s160-c-k-c0x00ffffff-no-rj",
+    icon: ARAKALAGAM_LOGO_URL,
   },
 };
 

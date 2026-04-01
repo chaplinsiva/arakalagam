@@ -36,14 +36,15 @@ export default function Collaboration() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="collaboration" className="relative py-24 lg:py-32">
+    <section id="collaboration" className="relative overflow-hidden py-24 lg:py-32">
       <div className="section-divider w-full absolute top-0" />
 
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#4B0082]/5 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[#4B0082]/7 to-transparent" />
+      <div className="pointer-events-none absolute -left-24 top-1/3 h-80 w-80 rounded-full bg-[#4B0082]/10 blur-[110px]" />
+      <div className="pointer-events-none absolute -right-16 bottom-1/4 h-72 w-72 rounded-full bg-[#D4AF37]/6 blur-[95px]" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div ref={ref} className="max-w-7xl mx-auto px-3 min-[400px]:px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
           {/* Left - CTA Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -58,7 +59,7 @@ export default function Collaboration() {
             </h2>
             <p className="text-[#A0A0B0] text-lg leading-relaxed mb-8">
               Partner with a media platform that drives real conversations.
-              Arakalagam TV offers unmatched reach into Tamil Nadu&apos;s most
+              ARAKALAGAM MEDIA offers unmatched reach into Tamil Nadu&apos;s most
               engaged, politically-aware audience.
             </p>
 
@@ -72,9 +73,9 @@ export default function Collaboration() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                    className="flex items-start gap-4 group"
+                    className="flex items-start gap-4 rounded-xl border border-[rgba(212,175,55,0.06)] bg-[rgba(12,12,18,0.45)] px-4 py-3 backdrop-blur-sm transition-colors group-hover:border-[rgba(212,175,55,0.14)]"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-[rgba(75,0,130,0.2)] flex items-center justify-center shrink-0 group-hover:bg-[rgba(75,0,130,0.3)] transition-colors">
+                    <div className="w-10 h-10 rounded-lg bg-[rgba(75,0,130,0.25)] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(75,0,130,0.15)] group-hover:bg-[rgba(75,0,130,0.35)] transition-colors">
                       <Icon className="w-5 h-5 text-[#D4AF37]" />
                     </div>
                     <div>
@@ -114,7 +115,7 @@ export default function Collaboration() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="glass-card p-10 text-center relative overflow-hidden">
+            <div className="glass-card glass-card-elevated p-6 sm:p-10 text-center relative overflow-hidden">
               {/* Decorative glow */}
               <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-[#D4AF37]/10 blur-[60px]" />
               <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-[#4B0082]/20 blur-[60px]" />

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -14,7 +13,11 @@ export default function VideoModal({ videoId, isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 md:p-8"
+          style={{
+            paddingTop: "max(0.5rem, env(safe-area-inset-top))",
+            paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))",
+          }}
           onClick={onClose}
         >
           {/* Backdrop */}
@@ -26,7 +29,7 @@ export default function VideoModal({ videoId, isOpen, onClose }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] shadow-[0_0_60px_rgba(75,0,130,0.3)]"
+            className="relative w-full max-w-5xl max-h-[min(90dvh,90svh)] aspect-video rounded-xl sm:rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] shadow-[0_0_60px_rgba(75,0,130,0.3)]"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe

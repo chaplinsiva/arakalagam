@@ -1,14 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  Mail,
-  Send,
-  User,
-  MessageSquare,
-  CheckCircle,
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "@/lib/contact";
 
 const YTIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -53,31 +48,20 @@ const socialLinks = [
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
-  };
 
   return (
-    <section id="contact" className="relative py-24 lg:py-32">
+    <section id="contact" className="relative overflow-hidden py-24 lg:py-32">
       <div className="section-divider w-full absolute top-0" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[min(90vw,520px)] w-[min(90vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#4B0082]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-[#D4AF37]/6 blur-[90px]" />
+
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-sm tracking-[0.3em] uppercase text-[#D4AF37] font-medium">
             Get In Touch
@@ -86,177 +70,104 @@ export default function Contact() {
             Contact <span className="gold-gradient">Us</span>
           </h2>
           <p className="text-[#A0A0B0] max-w-2xl mx-auto text-lg">
-            Have a story tip, collaboration idea, or just want to connect? We&apos;d
-            love to hear from you.
+            Call, email, or follow us — we&apos;re here for story tips, collaborations,
+            and media inquiries.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-6" />
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#D4AF37]/50" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+            <span className="h-px w-16 bg-gradient-to-r from-[#4B0082] to-[#D4AF37]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#4B0082]" />
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#4B0082]/50" />
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 space-y-8"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="space-y-4"
           >
-            {/* Email */}
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shadow-[0_0_20px_rgba(75,0,130,0.3)]">
-                  <Mail className="w-6 h-6 text-[#D4AF37]" />
-                </div>
-                <div>
-                  <h3 className="font-[var(--font-outfit)] text-lg font-bold text-white">
-                    Email Us
-                  </h3>
-                  <a
-                    href="mailto:arakalagamofficial@gmail.com"
-                    className="text-[#D4AF37] text-sm hover:underline"
-                  >
-                    arakalagamofficial@gmail.com
-                  </a>
-                </div>
+            <h3 className="font-[var(--font-outfit)] text-lg font-bold text-white mb-2">
+              Reach us directly
+            </h3>
+            <a
+              href={CONTACT_PHONE_TEL}
+              className="glass-card glass-card-elevated p-5 sm:p-6 flex items-center gap-4 hover:border-[rgba(212,175,55,0.35)] transition-all duration-300 group touch-manipulation"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shadow-[0_0_28px_rgba(75,0,130,0.4)] shrink-0">
+                <Phone className="w-7 h-7 text-[#D4AF37]" aria-hidden />
               </div>
-              <p className="text-[#A0A0B0] text-sm">
-                For collaborations, media inquiries, and story tips.
-              </p>
-            </div>
-
-            {/* Social Links */}
-            <div className="glass-card p-6">
-              <h3 className="font-[var(--font-outfit)] text-lg font-bold text-white mb-4">
-                Follow Us
-              </h3>
-              <div className="space-y-3">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-[rgba(75,0,130,0.15)] transition-colors group"
-                    >
-                      <div
-                        className="w-10 h-10 rounded-lg flex items-center justify-center"
-                        style={{ background: `${social.color}15` }}
-                      >
-                        <Icon
-                          className="w-5 h-5"
-                          style={{ color: social.color }}
-                        />
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-medium group-hover:text-[#D4AF37] transition-colors">
-                          {social.name}
-                        </p>
-                        <p className="text-[#A0A0B0] text-xs">
-                          {social.handle}
-                        </p>
-                      </div>
-                    </a>
-                  );
-                })}
+              <div className="min-w-0 text-left">
+                <p className="text-xs uppercase tracking-wider text-[#A0A0B0] mb-1">
+                  Call
+                </p>
+                <p className="font-[var(--font-outfit)] text-xl sm:text-2xl font-bold text-white group-hover:text-[#D4AF37] transition-colors">
+                  {CONTACT_PHONE_DISPLAY}
+                </p>
               </div>
-            </div>
+            </a>
 
-            {/* Response Time */}
-            <div className="text-center p-4 rounded-xl border border-[rgba(212,175,55,0.1)] bg-[rgba(75,0,130,0.05)]">
-              <p className="text-[#A0A0B0] text-sm">
-                Average response time:{" "}
-                <span className="text-[#D4AF37] font-medium">24 hours</span>
-              </p>
-            </div>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="glass-card p-5 sm:p-6 flex items-center gap-4 hover:border-[rgba(212,175,55,0.35)] transition-all duration-300 group touch-manipulation"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#4B0082] to-[#6A1BA5] flex items-center justify-center shadow-[0_0_24px_rgba(75,0,130,0.35)] shrink-0">
+                <Mail className="w-7 h-7 text-[#D4AF37]" aria-hidden />
+              </div>
+              <div className="min-w-0 text-left">
+                <p className="text-xs uppercase tracking-wider text-[#A0A0B0] mb-1">
+                  Email
+                </p>
+                <p className="font-medium text-[#D4AF37] text-sm sm:text-base break-all group-hover:underline">
+                  {CONTACT_EMAIL}
+                </p>
+              </div>
+            </a>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-3"
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="glass-card glass-card-elevated p-6 sm:p-8"
           >
-            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-medium text-[#A0A0B0] mb-2">
-                  Your Name
-                </label>
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0A0B0]" />
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
-                    placeholder="Enter your name"
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(212,175,55,0.1)] text-white placeholder-[#555] focus:outline-none focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300"
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-[#A0A0B0] mb-2">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A0A0B0]" />
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                    placeholder="your@email.com"
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(212,175,55,0.1)] text-white placeholder-[#555] focus:outline-none focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300"
-                  />
-                </div>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-sm font-medium text-[#A0A0B0] mb-2">
-                  Your Message
-                </label>
-                <div className="relative">
-                  <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-[#A0A0B0]" />
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    required
-                    rows={5}
-                    placeholder="Tell us about your inquiry, collaboration idea, or story tip..."
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(212,175,55,0.1)] text-white placeholder-[#555] focus:outline-none focus:border-[#D4AF37] focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 resize-none"
-                  />
-                </div>
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white font-semibold text-lg flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(75,0,130,0.5)] transition-all duration-500 hover:scale-[1.02] group"
-              >
-                {submitted ? (
-                  <>
-                    <CheckCircle className="w-5 h-5 text-[#D4AF37]" />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
+            <h3 className="font-[var(--font-outfit)] text-lg font-bold text-white mb-6">
+              Follow Us
+            </h3>
+            <div className="space-y-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-lg hover:bg-[rgba(75,0,130,0.15)] transition-colors group"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ background: `${social.color}15` }}
+                    >
+                      <Icon
+                        className="w-5 h-5"
+                        style={{ color: social.color }}
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-white text-sm font-medium group-hover:text-[#D4AF37] transition-colors">
+                        {social.name}
+                      </p>
+                      <p className="text-[#A0A0B0] text-xs truncate">
+                        {social.handle}
+                      </p>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </motion.div>
         </div>
       </div>

@@ -2,9 +2,10 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Play, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight, ExternalLink, ZoomIn } from "lucide-react";
 import Image from "next/image";
 import VideoModal from "./VideoModal";
+import CollageLightbox from "./CollageLightbox";
 
 const interviews = [
   {
@@ -45,12 +46,45 @@ const interviews = [
   },
 ];
 
+const COLLAGE_FILES = [
+  "IMG_20260304_113415.jpg.jpeg",
+  "IMG_20260304_122431.jpg.jpeg",
+  "IMG_20260304_123512.jpg (2).jpeg",
+  "IMG_20260304_124207.jpg.jpeg",
+  "IMG_20260304_133618_1.jpg.jpeg",
+  "IMG_20260304_135030.jpg.jpeg",
+  "IMG_20260304_140406.jpg.jpeg",
+  "IMG_20260304_140443.jpg.jpeg",
+  "IMG_20260401_140634.jpg.jpeg",
+  "Screenshot 2026-04-01 134121.png",
+  "Screenshot 2026-04-01 134216.png",
+  "Screenshot 2026-04-01 134959.png",
+  "Snapshot_300.PNG",
+  "T a.jpg",
+  "அரசு வன்முறையை பேசும் ஜெய் பீம் முக்கியமான படம் _ SuryavsPmk_Jaibhimissue _ Thirumavalavan Intervew 0-15 screenshot.png",
+  "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 2-42 screenshot.png",
+  "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 6-55 screenshot.png",
+];
+
 export default function FeaturedInterviews() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [modalVideo, setModalVideo] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const nextLightbox = useCallback(() => {
+    setLightboxIndex((i) =>
+      i === null ? null : (i + 1) % COLLAGE_FILES.length
+    );
+  }, []);
+  const prevLightbox = useCallback(() => {
+    setLightboxIndex((i) =>
+      i === null ? null : (i - 1 + COLLAGE_FILES.length) % COLLAGE_FILES.length
+    );
+  }, []);
 
   const goTo = useCallback(
     (index) => {
@@ -88,14 +122,13 @@ export default function FeaturedInterviews() {
   };
 
   return (
-    <section id="interviews" className="relative py-24 lg:py-32">
+    <section id="interviews" className="relative overflow-hidden py-24 lg:py-32">
       <div className="section-divider w-full absolute top-0" />
 
-      {/* Background glow */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-[#4B0082]/10 blur-[150px] pointer-events-none" />
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/5 blur-[120px] pointer-events-none" />
+      <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-[#4B0082]/14 blur-[100px]" />
+      <div className="pointer-events-none absolute -right-20 bottom-1/3 h-64 w-64 rounded-full bg-[#D4AF37]/8 blur-[90px]" />
 
-      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div ref={ref} className="max-w-6xl mx-auto px-3 min-[400px]:px-4 sm:px-6 lg:px-8 relative z-10 w-full min-w-0">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -106,14 +139,20 @@ export default function FeaturedInterviews() {
           <span className="text-sm tracking-[0.3em] uppercase text-[#D4AF37] font-medium">
             Voices That Matter
           </span>
-          <h2 className="font-[var(--font-outfit)] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6">
+          <h2 className="font-[var(--font-outfit)] text-3xl min-[400px]:text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 px-1">
             Featured <span className="gold-gradient">Interviews</span>
           </h2>
-          <p className="text-[#A0A0B0] max-w-2xl mx-auto text-lg">
+          <p className="text-[#A0A0B0] max-w-2xl mx-auto text-base sm:text-lg px-1">
             Conversations with leaders, thinkers, and changemakers shaping
             Tamil Nadu&apos;s political and social landscape.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-6" />
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#D4AF37]/50" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+            <span className="h-px w-14 max-w-[30vw] bg-gradient-to-r from-[#4B0082] to-[#D4AF37]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#4B0082]" />
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#4B0082]/50" />
+          </div>
         </motion.div>
 
         {/* Photo Collage */}
@@ -121,70 +160,70 @@ export default function FeaturedInterviews() {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20"
+          className="mb-16 sm:mb-20"
         >
-          {/* Collage heading */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-8 sm:mb-10 px-1">
             <span className="text-xs tracking-[0.3em] uppercase text-[#D4AF37] font-medium">
               On the Ground
             </span>
-            <h3 className="font-[var(--font-outfit)] text-2xl sm:text-3xl font-bold text-white mt-3">
+            <h3 className="font-[var(--font-outfit)] text-xl min-[400px]:text-2xl sm:text-3xl font-bold text-white mt-3">
               Behind the{" "}
               <span className="gold-gradient">Scenes</span>
             </h3>
+            <p className="text-[#888] text-xs sm:text-sm mt-3 max-w-md mx-auto">
+              Tap any photo for full screen — swipe with arrows or keyboard.
+            </p>
             <div className="w-16 h-0.5 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-4" />
           </div>
 
-          {/* Collage grid */}
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
-            {[
-              "IMG_20260304_113415.jpg.jpeg",
-              "IMG_20260304_122431.jpg.jpeg",
-              "IMG_20260304_123512.jpg (2).jpeg",
-              "IMG_20260304_124207.jpg.jpeg",
-              "IMG_20260304_133618_1.jpg.jpeg",
-              "IMG_20260304_135030.jpg.jpeg",
-              "IMG_20260304_140406.jpg.jpeg",
-              "IMG_20260304_140443.jpg.jpeg",
-              "IMG_20260401_140634.jpg.jpeg",
-              "Screenshot 2026-04-01 134121.png",
-              "Screenshot 2026-04-01 134216.png",
-              "Screenshot 2026-04-01 134959.png",
-              "Snapshot_300.PNG",
-              "T a.jpg",
-              "அரசு வன்முறையை பேசும் ஜெய் பீம் முக்கியமான படம் _ SuryavsPmk_Jaibhimissue _ Thirumavalavan Intervew 0-15 screenshot.png",
-              "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 2-42 screenshot.png",
-              "விஜயை வச்சு செய்த Thangam Tennarasu !! DMK இப்படி ஜெயிக்கும் புள்ளிவிபரத்தை அடுக்கிய உடன்பிறப்பு!! 6-55 screenshot.png",
-            ].map((filename, idx) => (
-              <motion.div
-                key={filename}
-                initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.05 * idx }}
-                className="relative overflow-hidden rounded-xl group break-inside-avoid shadow-lg mb-4 inline-block w-full"
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(212,175,55,0.08)",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/pics/${filename}`}
-                  alt={`Arakalagam interview moment ${idx + 1}`}
-                  loading="lazy"
-                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0F]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
-                {/* Gold shimmer on hover */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          {/* Bento-style responsive grid */}
+          <div className="grid max-[380px]:grid-cols-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+            {COLLAGE_FILES.map((filename, idx) => {
+              const isHero = idx === 0;
+              const isWide = idx > 0 && idx % 6 === 0;
+              return (
+                <motion.button
+                  type="button"
+                  key={filename}
+                  initial={{ opacity: 0, scale: 0.96, y: 16 }}
+                  animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: Math.min(0.04 * idx, 0.8) }}
+                  onClick={() => setLightboxIndex(idx)}
+                  className={[
+                    "group relative overflow-hidden rounded-xl sm:rounded-2xl text-left shadow-[0_8px_32px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.07] transition-all duration-500",
+                    "hover:ring-[#D4AF37]/45 hover:shadow-[0_16px_48px_rgba(75,0,130,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]",
+                    "active:scale-[0.985] sm:hover:-translate-y-0.5",
+                    isHero
+                      ? "max-[380px]:col-span-1 col-span-2 sm:col-span-2 sm:row-span-2 min-h-[180px] sm:min-h-[260px]"
+                      : "",
+                    isWide ? "sm:col-span-2" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   style={{
-                    background: "linear-gradient(90deg, #4B0082, #D4AF37)",
+                    background:
+                      "linear-gradient(145deg, rgba(75,0,130,0.12), rgba(255,255,255,0.02))",
                   }}
-                />
-              </motion.div>
-            ))}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/pics/${filename}`}
+                    alt={`ARAKALAGAM MEDIA interview moment ${idx + 1}`}
+                    loading="lazy"
+                    className={[
+                      "w-full h-full object-cover block transition-transform duration-700 group-hover:scale-[1.03]",
+                      isHero ? "min-h-[180px] sm:min-h-[280px]" : "min-h-[100px] sm:min-h-[120px]",
+                    ].join(" ")}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0B0F]/75 via-transparent to-transparent opacity-40 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute bottom-2 right-2 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#D4AF37] backdrop-blur-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                    <ZoomIn className="h-3.5 w-3.5" />
+                    View
+                  </div>
+                </motion.button>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -193,10 +232,10 @@ export default function FeaturedInterviews() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative"
+          className="relative px-11 sm:px-12 md:px-14 lg:px-16"
         >
           {/* Card */}
-          <div className="glass-card overflow-hidden rounded-2xl">
+          <div className="glass-card glass-card-elevated overflow-hidden rounded-2xl">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={person.id}
@@ -260,7 +299,7 @@ export default function FeaturedInterviews() {
                   />
 
                   <h3
-                    className="font-[var(--font-outfit)] text-2xl lg:text-3xl font-bold text-white mb-2"
+                    className="font-[var(--font-outfit)] text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 break-words"
                   >
                     {person.name}
                   </h3>
@@ -297,10 +336,10 @@ export default function FeaturedInterviews() {
             </AnimatePresence>
           </div>
 
-          {/* Nav arrows */}
+          {/* Nav arrows — inset on small screens so they stay visible */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 lg:-translate-x-7 w-12 h-12 rounded-full glass-card flex items-center justify-center border border-[rgba(212,175,55,0.2)] text-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] hover:scale-110 transition-all duration-300 z-20 shadow-xl"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-card flex items-center justify-center border border-[rgba(212,175,55,0.2)] text-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] active:scale-95 transition-all duration-300 z-20 shadow-xl touch-manipulation"
             aria-label="Previous interview"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -308,7 +347,7 @@ export default function FeaturedInterviews() {
 
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 lg:translate-x-7 w-12 h-12 rounded-full glass-card flex items-center justify-center border border-[rgba(212,175,55,0.2)] text-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] hover:scale-110 transition-all duration-300 z-20 shadow-xl"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-card flex items-center justify-center border border-[rgba(212,175,55,0.2)] text-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] active:scale-95 transition-all duration-300 z-20 shadow-xl touch-manipulation"
             aria-label="Next interview"
           >
             <ChevronRight className="w-5 h-5" />
@@ -333,13 +372,13 @@ export default function FeaturedInterviews() {
           ))}
         </div>
 
-        {/* Thumbnail strip */}
-        <div className="flex justify-center gap-4 mt-6">
+        {/* Thumbnail strip — scroll horizontally on narrow screens */}
+        <div className="flex gap-2 sm:gap-4 mt-6 overflow-x-auto pb-2 horizontal-scroll justify-start sm:justify-center px-1 -mx-1 min-w-0 w-full max-w-full touch-pan-x">
           {interviews.map((item, i) => (
             <button
               key={item.id}
               onClick={() => goTo(i)}
-              className="relative w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0"
+              className="relative w-[72px] h-[52px] sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 touch-manipulation"
               style={{
                 borderColor: i === current ? item.color : "transparent",
                 opacity: i === current ? 1 : 0.45,
@@ -363,6 +402,15 @@ export default function FeaturedInterviews() {
           ))}
         </div>
       </div>
+
+      <CollageLightbox
+        open={lightboxIndex !== null}
+        images={COLLAGE_FILES}
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onPrev={prevLightbox}
+        onNext={nextLightbox}
+      />
 
       <VideoModal
         videoId={modalVideo}

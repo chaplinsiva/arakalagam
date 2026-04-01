@@ -1,6 +1,8 @@
 "use client";
 
-import { Tv, ArrowUp } from "lucide-react";
+import { Tv, ArrowUp, Phone, Mail } from "lucide-react";
+import { ARAKALAGAM_LOGO_URL, NETWORK_YOUTUBE } from "@/lib/channels";
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "@/lib/contact";
 
 const YTIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -66,14 +68,14 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
-                <img src="https://yt3.googleusercontent.com/m3rHVIVMOHyoujV49Kjb2x9o4o5Hp7TpHNBh7GbRGx9L3UHSbdqfLLwfDsFcBdUOIRZXk-sb=s160-c-k-c0x00ffffff-no-rj" alt="Arakalagam TV Logo" className="w-full h-full object-cover" />
+                <img src={ARAKALAGAM_LOGO_URL} alt="ARAKALAGAM MEDIA logo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="font-[var(--font-outfit)] text-lg font-bold text-white tracking-wider">
                   ARAKALAGAM
                 </h3>
                 <p className="text-[10px] tracking-[0.3em] text-[#D4AF37] uppercase -mt-1">
-                  TV
+                  MEDIA
                 </p>
               </div>
             </div>
@@ -126,16 +128,16 @@ export default function Footer() {
               Our Network
             </h4>
             <ul className="space-y-3">
-              {[
-                "Arakalagam TV",
-                "Thiraikalagam",
-                "Porul Puthithu",
-                "Cheral",
-              ].map((channel) => (
-                <li key={channel}>
-                  <span className="text-[#A0A0B0] text-sm hover:text-[#D4AF37] transition-colors duration-300 cursor-pointer">
-                    {channel}
-                  </span>
+              {NETWORK_YOUTUBE.map((channel) => (
+                <li key={channel.url}>
+                  <a
+                    href={channel.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#A0A0B0] text-sm hover:text-[#D4AF37] transition-colors duration-300"
+                  >
+                    {channel.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -146,18 +148,26 @@ export default function Footer() {
             <h4 className="font-[var(--font-outfit)] text-sm font-bold text-white tracking-wider uppercase mb-6">
               Contact
             </h4>
-            <div className="space-y-3 text-sm text-[#A0A0B0]">
+            <div className="space-y-4 text-sm text-[#A0A0B0]">
               <a
-                href="mailto:arakalagamofficial@gmail.com"
-                className="block hover:text-[#D4AF37] transition-colors"
+                href={CONTACT_PHONE_TEL}
+                className="flex items-center gap-2 hover:text-[#D4AF37] transition-colors touch-manipulation"
               >
-                arakalagamofficial@gmail.com
+                <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" aria-hidden />
+                <span className="text-white font-medium">{CONTACT_PHONE_DISPLAY}</span>
+              </a>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="flex items-start gap-2 hover:text-[#D4AF37] transition-colors break-all"
+              >
+                <Mail className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" aria-hidden />
+                <span>{CONTACT_EMAIL}</span>
               </a>
               <a
                 href="https://www.youtube.com/@ARAKALAGAM"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D4AF37] transition-colors"
+                className="block hover:text-[#D4AF37] transition-colors pt-1"
               >
                 youtube.com/@ARAKALAGAM
               </a>
@@ -167,10 +177,10 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-[rgba(212,175,55,0.05)]">
+      <div className="relative z-10 border-t border-[rgba(212,175,55,0.08)] bg-[rgba(6,6,10,0.35)] backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#555] text-xs">
-            © {new Date().getFullYear()} Arakalagam TV. All rights reserved.
+            © {new Date().getFullYear()} ARAKALAGAM MEDIA. All rights reserved.
           </p>
           <p className="text-[#555] text-xs">
             Towards Social Change

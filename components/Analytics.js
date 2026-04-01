@@ -90,10 +90,11 @@ export default function Analytics() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="analytics" className="relative py-24 lg:py-32">
+    <section id="analytics" className="relative overflow-hidden py-24 lg:py-32">
       <div className="section-divider w-full absolute top-0" />
 
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/5 blur-[150px]" />
+      <div className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-[#D4AF37]/8 blur-[150px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-64 w-64 rounded-full bg-[#4B0082]/10 blur-[100px]" />
 
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -113,7 +114,13 @@ export default function Analytics() {
             Real numbers, real impact — our platform&apos;s reach speaks for
             itself.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-6" />
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#D4AF37]/50" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+            <span className="h-px w-16 bg-gradient-to-r from-[#4B0082] to-[#D4AF37]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#4B0082]" />
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#4B0082]/50" />
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-6">
@@ -127,7 +134,7 @@ export default function Analytics() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                  className="glass-card p-5"
+                  className="glass-card glass-card-elevated p-5 transition-transform duration-300 hover:-translate-y-0.5"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div
@@ -171,7 +178,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-2 glass-card p-8"
+            className="lg:col-span-2 glass-card glass-card-elevated p-8"
           >
             <div className="flex items-center justify-between mb-8">
               <div>

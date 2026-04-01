@@ -181,10 +181,13 @@ export default function HighlightVideos() {
   const displayedVideos = showAll ? filtered : filtered.slice(0, 6);
 
   return (
-    <section id="videos" className="relative py-24 lg:py-32">
+    <section id="videos" className="relative overflow-hidden py-24 lg:py-32">
       <div className="section-divider w-full absolute top-0" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute -right-24 top-1/4 h-80 w-80 rounded-full bg-[#D4AF37]/10 blur-[110px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#4B0082]/10 blur-[100px]" />
+
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -202,7 +205,13 @@ export default function HighlightVideos() {
             Our most impactful stories — the videos that drove national
             conversations and demanded accountability.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#4B0082] to-[#D4AF37] mx-auto rounded-full mt-6" />
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#D4AF37]/50" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+            <span className="h-px w-16 bg-gradient-to-r from-[#4B0082] to-[#D4AF37]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#4B0082]" />
+            <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#4B0082]/50" />
+          </div>
         </motion.div>
 
         {/* Category Filter */}
@@ -210,13 +219,13 @@ export default function HighlightVideos() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-12 overflow-x-auto pb-2 -mx-1 px-1 horizontal-scroll touch-pan-x min-w-0"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`shrink-0 px-4 py-2.5 sm:px-5 rounded-full text-sm font-medium transition-all duration-300 touch-manipulation ${
                 activeCategory === cat
                   ? "bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white shadow-[0_0_20px_rgba(75,0,130,0.4)]"
                   : "border border-[rgba(212,175,55,0.15)] text-[#A0A0B0] hover:text-[#D4AF37] hover:border-[rgba(212,175,55,0.3)]"
@@ -237,7 +246,7 @@ export default function HighlightVideos() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-              className="glass-card overflow-hidden group cursor-pointer"
+              className="glass-card glass-card-elevated overflow-hidden group cursor-pointer transition-transform duration-300 hover:-translate-y-1"
               onClick={() => isTwitter ? window.open(video.youtubeUrl, '_blank') : setModalVideo(video.videoId)}
             >
               {/* Thumbnail */}

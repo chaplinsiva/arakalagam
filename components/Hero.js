@@ -14,6 +14,7 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40 bg-gradient-to-t from-[#0B0B0F] to-transparent" />
       {/* Background layers */}
       <div className="absolute inset-0">
         {/* Dark gradient base */}
@@ -39,13 +40,13 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 min-[400px]:px-4 sm:px-6 lg:px-8 text-center py-24 sm:py-32 min-w-0">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(212,175,55,0.2)] bg-[rgba(75,0,130,0.15)] backdrop-blur-sm mb-8"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(212,175,55,0.25)] bg-[rgba(75,0,130,0.2)] backdrop-blur-md shadow-[0_8px_32px_rgba(75,0,130,0.15)] mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
           <span className="text-sm text-[#D4AF37] font-medium tracking-wide">
@@ -61,8 +62,8 @@ export default function Hero() {
           className="font-[var(--font-outfit)] text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight mb-4"
         >
           <span className="block text-white">ARAKALAGAM</span>
-          <span className="block gold-gradient text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] mt-2">
-            TV
+          <span className="block gold-gradient text-[clamp(1.5rem,6vw,4.5rem)] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.15em] sm:tracking-[0.2em] mt-2">
+            MEDIA
           </span>
         </motion.h1>
 
@@ -90,10 +91,10 @@ export default function Hero() {
           ].map((tag, i) => (
             <span
               key={tag}
-              className="text-sm sm:text-base text-[#A0A0B0] flex items-center gap-2"
+              className="text-sm sm:text-base text-[#C8C8D0] flex items-center gap-2 rounded-full border border-[rgba(212,175,55,0.12)] bg-[rgba(255,255,255,0.03)] px-4 py-2 backdrop-blur-sm"
             >
               {i > 0 && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                <span className="hidden sm:inline w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
               )}
               {tag}
             </span>
@@ -109,14 +110,14 @@ export default function Hero() {
         >
           <button
             onClick={() => handleScroll("#videos")}
-            className="group px-8 py-4 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white font-semibold text-lg flex items-center gap-3 hover:shadow-[0_0_40px_rgba(75,0,130,0.5)] transition-all duration-500 hover:scale-105"
+            className="group px-8 py-4 rounded-full bg-gradient-to-r from-[#4B0082] to-[#6A1BA5] text-white font-semibold text-lg flex items-center gap-3 ring-1 ring-white/10 shadow-[0_12px_40px_rgba(75,0,130,0.35)] hover:shadow-[0_0_48px_rgba(75,0,130,0.55)] transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
           >
             <Play className="w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
             Watch Highlights
           </button>
           <button
             onClick={() => handleScroll("#collaboration")}
-            className="px-8 py-4 rounded-full border border-[rgba(212,175,55,0.3)] text-[#D4AF37] font-semibold text-lg flex items-center gap-3 hover:bg-[rgba(212,175,55,0.08)] hover:border-[rgba(212,175,55,0.5)] transition-all duration-500 hover:scale-105"
+            className="px-8 py-4 rounded-full border border-[rgba(212,175,55,0.35)] bg-[rgba(255,255,255,0.02)] text-[#D4AF37] font-semibold text-lg flex items-center gap-3 backdrop-blur-sm hover:bg-[rgba(212,175,55,0.1)] hover:border-[rgba(212,175,55,0.55)] hover:shadow-[0_0_30px_rgba(212,175,55,0.12)] transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
           >
             <Users className="w-5 h-5" />
             Collaborate With Us
@@ -128,18 +129,23 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-8 sm:gap-16"
+          className="flex flex-wrap justify-center gap-4 sm:gap-6"
         >
           {[
             { number: "300K+", label: "Subscribers" },
             { number: "5000+", label: "Videos" },
             { number: "5M+", label: "Monthly Views" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
+            <div
+              key={stat.label}
+              className="glass-card-elevated min-w-[132px] px-6 py-5 text-center transition-transform duration-300 hover:-translate-y-0.5"
+            >
               <p className="font-[var(--font-outfit)] text-3xl sm:text-4xl font-bold gold-gradient">
                 {stat.number}
               </p>
-              <p className="text-sm text-[#A0A0B0] mt-1">{stat.label}</p>
+              <p className="text-xs sm:text-sm text-[#A0A0B0] mt-2 tracking-wide">
+                {stat.label}
+              </p>
             </div>
           ))}
         </motion.div>
