@@ -11,6 +11,7 @@ export default function CollageLightbox({
   onClose,
   onPrev,
   onNext,
+  basePath = "/pics/",
 }) {
   const handleKey = useCallback(
     (e) => {
@@ -36,7 +37,7 @@ export default function CollageLightbox({
     };
   }, [open]);
 
-  const src = index !== null && images[index] ? `/pics/${images[index]}` : null;
+  const src = index !== null && images[index] ? `${basePath}${images[index]}` : null;
 
   return (
     <AnimatePresence>

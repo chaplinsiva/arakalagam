@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import LatestWorks from "@/components/LatestWorks";
 import Achievements from "@/components/Achievements";
 import HighlightVideos from "@/components/HighlightVideos";
 import Documentaries from "@/components/Documentaries";
@@ -18,6 +19,7 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <LatestWorks />
         <FeaturedInterviews />
         <Documentaries />
         <Achievements />
